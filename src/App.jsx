@@ -1,20 +1,30 @@
+import ScoreBoard from "./components/ScoreBoard/ScoreBoard";
+import MemoryCardsGrid from "./components/MemoryCardsGrid/MemoryCardsGrid";
+
 import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [currentScore, setCurrentScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
+
+  const updateCurrentScore = (newScore) => setCurrentScore(newScore);
+  const updateBestScore = (newScore) => setBestScore(newScore);
 
   return (
     <>
-      <h1>Pokémon memory game</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
+      <header>
+        <h1>Pokémon memory game</h1>
+        <ScoreBoard currentScore={currentScore} bestScore={bestScore} />
+      </header>
+      <main>
+        <MemoryCardsGrid
+          currentScore={currentScore}
+          bestScore={bestScore}
+          updateCurrentScore={updateCurrentScore}
+          updateBestScore={updateBestScore}
+        />
+      </main>
     </>
   );
 }
