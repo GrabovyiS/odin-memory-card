@@ -1,4 +1,5 @@
 import MemoryCard from "../MemoryCard/MemoryCard";
+import Loader from "../Loader/Loader";
 import "./MemoryCardsGrid.css";
 
 import { useState } from "react";
@@ -94,11 +95,12 @@ function MemoryCardsGrid({
         </button>
         <button onClick={() => setDataFetched(false)}>Get new Pokémon</button>
       </header>
-      <div className="cards-container">
-        {!dataFetched ? (
-          <p>Loading pokémon...</p>
-        ) : (
-          cardsData.map((pokemon) => (
+
+      {!dataFetched ? (
+        <Loader text={"Pokémon are loading..."} />
+      ) : (
+        <div className="cards-container">
+          {cardsData.map((pokemon) => (
             <MemoryCard
               key={pokemon.id}
               id={pokemon.id}
@@ -106,9 +108,9 @@ function MemoryCardsGrid({
               imageUrl={pokemon.imageUrl}
               onClick={handleCardClick}
             />
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }
