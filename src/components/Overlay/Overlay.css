@@ -1,0 +1,30 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #242424bb;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .overlay-content {
+    p {
+      font-size: 40px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .overlay-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+
+      button {
+        font-size: 24px;
+      }
+    }
+  }
+}
