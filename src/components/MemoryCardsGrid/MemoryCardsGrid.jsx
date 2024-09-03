@@ -82,7 +82,7 @@ function MemoryCardsGrid({
   return (
     <section className="memory-cards-grid">
       <header>
-        <h2>Click the pokémon you have not clicked before!</h2>
+        <h2>Find the pokémon you have not clicked before!</h2>
         <button
           onClick={(e) => {
             randomizeCards();

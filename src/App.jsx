@@ -13,7 +13,7 @@ function App() {
 
   return (
     <>
-      <header>
+      <header className="top-header">
         <h1>Pokémon memory game</h1>
         <ScoreBoard currentScore={currentScore} bestScore={bestScore} />
       </header>
