@@ -1,0 +1,11 @@
+section.memory-cards-grid {
+  header {
+    display: flex;
+    justify-content: start;
+    gap: 24px;
+
+    .left-button {
+      margin-left: auto;
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import ScoreBoard from "./components/ScoreBoard/ScoreBoard";
-import MemoryCardsGrid from "./components/MemoryCardsGrid/MemoryCardsGrid";
+import MemoryCardsGrid from "./components/GameField/GameField";
 
 import { useState } from "react";
 import "./App.css";
