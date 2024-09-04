@@ -33,7 +33,11 @@ function Overlay({ text, buttons }) {
         <p>{text}</p>
         <div className="overlay-buttons">
           {buttons.map((button) => {
-            return <button onClick={button.onClick}>{button.text}</button>;
+            return (
+              <button key={button.text} onClick={button.onClick}>
+                {button.text}
+              </button>
+            );
           })}
         </div>
       </div>
