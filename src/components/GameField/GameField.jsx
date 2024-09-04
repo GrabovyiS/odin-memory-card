@@ -98,14 +98,21 @@ function GameField({
   };
 
   const handleRestartClick = () => {
+    setCardsData(null);
+    setClickedCardIds([]);
+    updateCurrentScore(0);
+    setShowGameOver(false);
+
     randomizeCards();
     document.activeElement.blur();
-    setShowGameOver(false);
   };
 
   const handleNewPokemonClick = () => {
-    setShowGameOver(false);
+    setCardsData(null);
+    setClickedCardIds([]);
     setDataFetched(false);
+    setShowGameOver(false);
+
     setPokemonListOffset(getRandomOffset());
   };
 
