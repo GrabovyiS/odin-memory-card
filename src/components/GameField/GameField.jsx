@@ -6,27 +6,12 @@ import "./GameField.css";
 import { useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
 import shuffle from "../../helpers/shuffle";
-
-const NUMBER_OF_CARDS = 25;
-const TOTAL_POKEMON_COUNT = 1302;
-
-const getPokemons = async (offset) => {
-  const pokemonsResponse = await fetch(
-    `https://pokeapi.co/api/v2/pokemon?limit=${NUMBER_OF_CARDS}&offset=${offset}`
-  );
-  const pokemonsJson = await pokemonsResponse.json();
-  return pokemonsJson.results;
-};
-
-const getPokemonImgUrl = async (pokemonUrl) => {
-  const pokemonResponse = await fetch(pokemonUrl);
-  const pokemonJson = await pokemonResponse.json();
-  return pokemonJson.sprites.front_default;
-};
-
-const getRandomOffset = () => {
-  return Math.floor(Math.random() * (TOTAL_POKEMON_COUNT - NUMBER_OF_CARDS));
-};
+import {
+  getPokemons,
+  getPokemonImgUrl,
+  getRandomOffset,
+} from "./fetchPokemonHelpers";
+import { NUMBER_OF_CARDS } from "../../constants/constants";
 
 function GameField({
   currentScore,
