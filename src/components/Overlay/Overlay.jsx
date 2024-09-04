@@ -13,7 +13,13 @@ function adjustOverlayPosition() {
     overlayContent.style.transform = "none";
   } else {
     overlay.style.transform = `translateY(${anchorRect.bottom}px)`;
-    overlayContent.style.transform = `translateY(-${anchorRect.bottom}px)`;
+    if (window.innerHeight > window.innerWidth) {
+      overlayContent.style.transform = `translateY(-${
+        anchorRect.bottom / 1.65
+      }px)`;
+    } else {
+      overlayContent.style.transform = `translateY(-${anchorRect.bottom}px)`;
+    }
   }
 }
 

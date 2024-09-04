@@ -5,10 +5,25 @@
   width: 100%;
 }
 
-header {
+header.top-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 160px;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
+}
+
+@media screen and (width < 600px) {
+  #root {
+    padding: 16px;
+  }
+
+  header.top-header {
+    flex-direction: column;
+    align-items: start;
+    margin-bottom: 32px;
+  }
+
+  h1 {
+    margin-bottom: 16px;
+  }
 }

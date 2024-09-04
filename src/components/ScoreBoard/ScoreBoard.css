@@ -1,5 +1,18 @@
+.score-board {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .score-board p {
-  margin: 6px;
+  margin: 0;
   text-align-last: right;
   font-size: 18px;
+  min-width: 15ch;
+}
+
+@media screen and (width < 600px) {
+  .score-board p {
+    text-align-last: left;
+  }
 }

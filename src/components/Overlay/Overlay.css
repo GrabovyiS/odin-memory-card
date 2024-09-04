@@ -1,10 +1,13 @@
 .overlay {
+  box-sizing: border-box;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
+  padding-left: 16px;
+  padding-right: 16px;
   background-color: #242424bb;
 
   display: flex;
@@ -63,5 +66,18 @@
   }
   100% {
     transform: scale(1.05);
+  }
+}
+
+@media screen and (width < 600px) {
+  .overlay.victory {
+    p {
+      font-size: 48px;
+    }
+  }
+
+  .overlay .overlay-content .overlay-buttons button {
+    font-size: 20px;
+    width: min-content;
   }
 }

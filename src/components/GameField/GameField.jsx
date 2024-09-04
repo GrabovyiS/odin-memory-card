@@ -109,10 +109,12 @@ function GameField({
     <section className="memory-cards-grid">
       <header>
         <h2>Find the pokémon you have not clicked before!</h2>
-        <button onClick={handleRestartClick} className="left-button">
-          Restart
-        </button>
-        <button onClick={handleNewPokemonClick}>Get new Pokémon</button>
+        <div className="game-control-buttons">
+          <button onClick={handleRestartClick} className="left-button">
+            Restart
+          </button>
+          <button onClick={handleNewPokemonClick}>Get new Pokémon</button>
+        </div>
       </header>
 
       {showGameOver && (
