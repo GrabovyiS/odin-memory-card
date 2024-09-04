@@ -3,14 +3,14 @@ import Overlay from "../Overlay/Overlay";
 import Loader from "../Loader/Loader";
 import "./GameField.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
 import shuffle from "../../helpers/shuffle";
 
 const NUMBER_OF_CARDS = 25;
+const TOTAL_POKEMON_COUNT = 1302;
 
-const getPokemons = async () => {
-  const offset = Math.floor(Math.random() * 1000);
+const getPokemons = async (offset) => {
   const pokemonsResponse = await fetch(
     `https://pokeapi.co/api/v2/pokemon?limit=${NUMBER_OF_CARDS}&offset=${offset}`
   );
@@ -24,6 +24,10 @@ const getPokemonImgUrl = async (pokemonUrl) => {
   return pokemonJson.sprites.front_default;
 };
 
+const getRandomOffset = () => {
+  return Math.floor(Math.random() * (TOTAL_POKEMON_COUNT - NUMBER_OF_CARDS));
+};
+
 function GameField({
   currentScore,
   bestScore,
@@ -35,32 +39,41 @@ function GameField({
   const [clickedCardIds, setClickedCardIds] = useState([]);
   const [showGameOver, setShowGameOver] = useState(false);
   const [gameOverScore, setGameOverScore] = useState(0);
+  const [pokemonListOffset, setPokemonListOffset] = useState(getRandomOffset());
 
-  const fetchData = async () => {
-    const pokemonData = await getPokemons();
-    const pokemonImageUrlPromises = [];
+  useEffect(() => {
+    let ignore = false;
+    const fetchData = async () => {
+      const pokemonData = await getPokemons(pokemonListOffset);
+      const pokemonImageUrlPromises = [];
 
-    for (const pokemon of pokemonData) {
-      const pokemonImageUrlPromise = getPokemonImgUrl(pokemon.url);
-      pokemonImageUrlPromises.push(pokemonImageUrlPromise);
-    }
+      for (const pokemon of pokemonData) {
+        const pokemonImageUrlPromise = getPokemonImgUrl(pokemon.url);
+        pokemonImageUrlPromises.push(pokemonImageUrlPromise);
+      }
 
-    const cardsData = [];
-    const pokemonImgUrls = await Promise.all(pokemonImageUrlPromises);
-    for (let i = 0; i < NUMBER_OF_CARDS; i++) {
-      cardsData.push({
-        name: pokemonData[i].name,
-        imageUrl: pokemonImgUrls[i],
-        id: uuid(),
-      });
-    }
-    setCardsData(cardsData);
-    setDataFetched(true);
-  };
+      const cardsData = [];
+      const pokemonImgUrls = await Promise.all(pokemonImageUrlPromises);
+      for (let i = 0; i < NUMBER_OF_CARDS; i++) {
+        cardsData.push({
+          name: pokemonData[i].name,
+          imageUrl: pokemonImgUrls[i],
+          id: uuid(),
+        });
+      }
 
-  if (!dataFetched) {
+      if (!ignore) {
+        setCardsData(cardsData);
+        setDataFetched(true);
+      }
+    };
+
     fetchData();
-  }
+
+    return () => {
+      ignore = true;
+    };
+  }, [pokemonListOffset]);
 
   const randomizeCards = () => setCardsData(shuffle(cardsData));
 
@@ -93,6 +106,7 @@ function GameField({
   const handleNewPokemonClick = () => {
     setShowGameOver(false);
     setDataFetched(false);
+    setPokemonListOffset(getRandomOffset());
   };
 
   return (
