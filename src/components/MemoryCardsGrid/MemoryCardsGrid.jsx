@@ -4,9 +4,11 @@ import "./MemoryCardsGrid.css";
 function MemoryCardsGrid({ cardsData, handleCardClick, gameOver }) {
   return (
     <div className="cards-container">
-      {cardsData.map((cardItem) => (
+      {cardsData.map((cardItem, index) => (
         <MemoryCard
-          key={cardItem.id}
+          // Using index as key (therefore re-rendering every card when cardsData is reordered)
+          // somehow fixed the page jumping around when the cardsData was shuffled (restart, click on card)
+          key={index}
           id={cardItem.id}
           disabled={gameOver}
           heading={cardItem.name}
