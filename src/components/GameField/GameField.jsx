@@ -23,7 +23,6 @@ function GameField({
   const [cardsData, setCardsData] = useState(null);
   const [clickedCardIds, setClickedCardIds] = useState([]);
   const [showGameOver, setShowGameOver] = useState(false);
-  const [gameOverScore, setGameOverScore] = useState(0);
   const [pokemonListOffset, setPokemonListOffset] = useState(getRandomOffset());
 
   useEffect(() => {
@@ -71,14 +70,20 @@ function GameField({
       ]);
       randomizeCards();
       updateCurrentScore(currentScore + 1);
+
+      if (currentScore + 1 === NUMBER_OF_CARDS) {
+        setShowGameOver(true);
+        updateBestScore(currentScore + 1);
+        return;
+      }
+
+      randomizeCards();
     } else {
       setClickedCardIds([]);
       if (currentScore > bestScore) {
         updateBestScore(currentScore);
       }
-      setGameOverScore(currentScore);
       setShowGameOver(true);
-      updateCurrentScore(0);
     }
   };
 
@@ -91,10 +96,12 @@ function GameField({
   };
 
   const handleNewPokemonClick = () => {
-    setCardsData(null);
     setClickedCardIds([]);
-    setDataFetched(false);
+    updateCurrentScore(0);
     setShowGameOver(false);
+
+    setCardsData(null);
+    setDataFetched(false);
 
     setPokemonListOffset(getRandomOffset());
   };
@@ -115,7 +122,12 @@ function GameField({
             { text: "Restart", onClick: handleRestartClick },
             { text: "Get new Pokémon", onClick: handleNewPokemonClick },
           ]}
-          text={"Game over. Your score: " + gameOverScore}
+          text={
+            currentScore < NUMBER_OF_CARDS
+              ? "Game over. Your score: " + currentScore
+              : "Victory!"
+          }
+          animation={currentScore === NUMBER_OF_CARDS ? "victory" : null}
         />
       )}
 
