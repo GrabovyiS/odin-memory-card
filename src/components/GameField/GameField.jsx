@@ -63,6 +63,7 @@ function GameField({
   const randomizeCards = () => setCardsData(shuffle(cardsData));
 
   const handleCardClick = (e) => {
+    document.activeElement.blur();
     if (!clickedCardIds.includes(e.target.closest(".memory-card").id)) {
       setClickedCardIds([
         ...clickedCardIds,
@@ -89,7 +90,6 @@ function GameField({
     setShowGameOver(false);
 
     randomizeCards();
-    document.activeElement.blur();
   };
 
   const handleNewPokemonClick = () => {
