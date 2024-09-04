@@ -73,7 +73,6 @@ function GameField({
       updateCurrentScore(currentScore + 1);
     } else {
       setClickedCardIds([]);
-      randomizeCards();
       if (currentScore > bestScore) {
         updateBestScore(currentScore);
       }
