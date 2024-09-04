@@ -68,7 +68,6 @@ function GameField({
         ...clickedCardIds,
         e.target.closest(".memory-card").id,
       ]);
-      randomizeCards();
       updateCurrentScore(currentScore + 1);
 
       if (currentScore + 1 === NUMBER_OF_CARDS) {

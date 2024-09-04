@@ -16,6 +16,8 @@
       font-size: 40px;
       font-weight: bold;
       text-align: center;
+      margin-top: 0;
+      margin-bottom: 24px;
     }
 
     .overlay-buttons {
@@ -27,5 +29,39 @@
         font-size: 24px;
       }
     }
+  }
+}
+
+.overlay.victory {
+  background: linear-gradient(130deg, #bc6137a0, #9a0ec0a0);
+  background-size: 100% 400%;
+  transform: translateY(0);
+
+  animation: gradient 3.5s linear infinite,
+    scaling 1.75s ease alternate infinite;
+
+  p {
+    font-size: 68px;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 99% 0%;
+  }
+  50% {
+    background-position: 2% 100%;
+  }
+  100% {
+    background-position: 99% 0%;
+  }
+}
+
+@keyframes scaling {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
   }
 }

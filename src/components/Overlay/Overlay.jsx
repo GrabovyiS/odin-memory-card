@@ -17,18 +17,22 @@ function adjustOverlayPosition() {
   }
 }
 
-function Overlay({ text, buttons }) {
+function Overlay({ text, buttons, animation }) {
   useEffect(() => {
-    adjustOverlayPosition();
     console.log("adding event listener");
-    window.addEventListener("scroll", adjustOverlayPosition);
+    if (!animation) {
+      adjustOverlayPosition();
+      window.addEventListener("scroll", adjustOverlayPosition);
+    }
     return () => {
-      window.removeEventListener("scroll", adjustOverlayPosition);
+      if (!animation) {
+        window.removeEventListener("scroll", adjustOverlayPosition);
+      }
     };
   }, []);
 
   return (
-    <div className="overlay">
+    <div className={"overlay " + animation}>
       <div className="overlay-content">
         <p>{text}</p>
         <div className="overlay-buttons">
