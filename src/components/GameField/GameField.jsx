@@ -84,7 +84,6 @@ function GameField({
   };
 
   const handleRestartClick = () => {
-    setCardsData(null);
     setClickedCardIds([]);
     updateCurrentScore(0);
     setShowGameOver(false);
