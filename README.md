@@ -1,8 +1,9 @@
-# React + Vite
+# Odin Memory Card game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Implementation details
 
-Currently, two official plugins are available:
+Responsive memory card game using pokeapi. Fetching data with useEffect is done so that it eliminates race conditions. Responsive overlay on victory and defeat screens behaves almost like a position sticky element taken out of normal flow, but with different scrolling speeds for certain conditions.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Live app
+
+[View live app](https://resilient-basbousa-07f25c.netlify.app/)
